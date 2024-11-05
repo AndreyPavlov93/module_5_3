@@ -11,32 +11,49 @@ class House:
                 print(etazhi)
 
     def __eq__(self, other):
+        if isinstance(other, House):
+            return self.number_of_floors == other.number_of_floors
         return self.number_of_floors == other
 
     def __le__(self, other):
+        if isinstance(other, House):
+            return self.number_of_floors <= other.number_of_floors
         return self.number_of_floors <= other
 
     def __ge__(self, other):
+        if isinstance(other, House):
+            return self.number_of_floors >= other.number_of_floors
         return self.number_of_floors >= other
 
     def __ne__(self, other):
+        if isinstance(other, House):
+            return self.number_of_floors != other.number_of_floors
         return self.number_of_floors != other
 
     def __lt__(self, other):
+        if isinstance(other, House):
+            return self.number_of_floors < other.number_of_floors
         return self.number_of_floors < other
 
     def __gt__(self, other):
+        if isinstance(other, House):
+            return self.number_of_floors > other.number_of_floors
         return self.number_of_floors > other
 
     def __add__(self, value):
-        return self.number_of_floors + value
+        if isinstance(value, House):
+            return House(self.name, self.number_of_floors + value.number_of_floors)
+        return House(self.name, self.number_of_floors + value)
 
     def __radd__(self, value):
-        return value + self.number_of_floors
+        return self.__add__(value)
 
     def __iadd__(self, value):
-        self.number_of_floors += value
-
+        if isinstance(value, House):
+            self.number_of_floors += value.number_of_floors
+        else:
+            self.number_of_floors += value
+        return self
 
     def __len__(self):
         return self.number_of_floors
